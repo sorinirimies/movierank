@@ -1,4 +1,4 @@
-package de.graphql.movies.ui
+package de.graphql.movies.ui.tvshows
 
 import androidx.lifecycle.ViewModel;
 
