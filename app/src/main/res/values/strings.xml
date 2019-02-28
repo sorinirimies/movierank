@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">movierank</string>
+    <string name="app_name">MovieRank</string>
+    <string name="movies">Movies</string>
+    <string name="series">Tv Shows</string>
 </resources>
