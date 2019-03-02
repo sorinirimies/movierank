@@ -5,4 +5,4 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-class Movie(val name: String, val year: Date, val rank: Float, val imgUrl: String): Parcelable
+class MovieListItem(val title: String, val date: Date, val rank: Float, val imgUrl: String): Parcelable

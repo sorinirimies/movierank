@@ -3,16 +3,16 @@ package de.graphql.movies.ui.movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.graphql.movies.model.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.graphql.movies.R
+import de.graphql.movies.model.MovieListItem
 import kotlinx.android.synthetic.main.listitem_movie.view.*
 
-typealias  MovieSelected = (movie: Movie) -> Unit
+typealias  MovieSelected = (movieListItem: MovieListItem) -> Unit
 
 class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
-    private val movies: ArrayList<Movie> = ArrayList()
+    private val movieListItems: ArrayList<MovieListItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
         MoviesViewHolder(
@@ -24,48 +24,48 @@ class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Ada
         )
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) =
-        holder.bind(movies[position], movieSelected)
+        holder.bind(movieListItems[position], movieSelected)
 
-    fun addItem(item: Movie) {
-        if (movies.map { it.name }.contains(item.name)) return
-        movies.add(item)
-        notifyItemInserted(movies.indexOf(item))
+    fun addItem(item: MovieListItem) {
+        if (movieListItems.map { it.title }.contains(item.title)) return
+        movieListItems.add(item)
+        notifyItemInserted(movieListItems.indexOf(item))
     }
 
-    fun addItems(items: List<Movie>) {
-        movies.clear()
-        movies.addAll(items)
+    fun addItems(items: List<MovieListItem>) {
+        movieListItems.clear()
+        movieListItems.addAll(items)
         notifyDataSetChanged()
     }
 
     fun clearItems() {
-        movies.clear()
+        movieListItems.clear()
         notifyDataSetChanged()
     }
 
-    fun removeItem(item: Movie) {
-        val position = movies.indexOf(item)
-        movies.removeAt(position)
+    fun removeItem(item: MovieListItem) {
+        val position = movieListItems.indexOf(item)
+        movieListItems.removeAt(position)
         notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return movieListItems.size
     }
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val contMovieItem = view.contMovieItem
-        private val imgMovieTitle = view.imgMovie
-        private val tvMovieTitle = view.tvMovieTitle
-        private val tvMovieScore = view.tvMovieScore
-        private val tvMovieYear = view.tvMovieYear
+        private val imgMovieTitle = view.imgItemMoviePoster
+        private val tvMovieTitle = view.tvItemMovieTitle
+        private val tvMovieScore = view.tvItemMovieRating
+        private val tvMovieYear = view.tvItemMovieYear
 
-        fun bind(movie: Movie, movieSelected: MovieSelected) {
-            Picasso.get().load(movie.imgUrl).placeholder(R.drawable.ic_movies).into(imgMovieTitle)
-            tvMovieTitle.text = movie.name
-            tvMovieScore.text = "${movie.rank}"
-            tvMovieYear.text = movie.year.toString()
-            contMovieItem.setOnClickListener { movieSelected.invoke(movie) }
+        fun bind(movieListItem: MovieListItem, movieSelected: MovieSelected) {
+            Picasso.get().load(movieListItem.imgUrl).placeholder(R.drawable.ic_movies).into(imgMovieTitle)
+            tvMovieTitle.text = movieListItem.title
+            tvMovieScore.text = "${movieListItem.rank}"
+            tvMovieYear.text = movieListItem.date.toString()
+            contMovieItem.setOnClickListener { movieSelected.invoke(movieListItem) }
         }
     }
 }
