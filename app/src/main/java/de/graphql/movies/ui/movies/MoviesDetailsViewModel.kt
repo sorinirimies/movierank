@@ -1,7 +1,7 @@
 package de.graphql.movies.ui.movies
 
-import androidx.lifecycle.ViewModel
+import de.graphql.movies.CoroutineViewModel
 
-class MoviesDetailsViewModel : ViewModel() {
+class MoviesDetailsViewModel : CoroutineViewModel() {
     // TODO: Implement the ViewModel
 }

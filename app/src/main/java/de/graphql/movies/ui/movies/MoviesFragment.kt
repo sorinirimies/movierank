@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import de.graphql.movies.R
+import de.graphql.movies.utils.toMovieDetails
 import kotlinx.android.synthetic.main.movies_fragment.*
-import org.koin.android.viewmodel.ext.viewModel
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import org.koin.androidx.viewmodel.ext.viewModel
 
 class MoviesFragment : Fragment() {
 
-    private val viewModel by viewModel<MoviesViewModel>()
+    private val moviesViewModel: MoviesViewModel by viewModel()
     private lateinit var moviesAdapter: MoviesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +30,35 @@ class MoviesFragment : Fragment() {
         rvMovies.apply {
             moviesAdapter = MoviesAdapter {
                 startActivity(Intent(activity, MoviesDetailsActivity::class.java).apply {
-                    putExtra(PARAM_MOVIE, it)
+                    putExtra(PARAM_MOVIE, it.toMovieDetails())
                 })
             }
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = moviesAdapter
         }
+        moviesViewModel.loadMovies(20)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        moviesViewModel.moviesLiveData.observe(this,
+            Observer { movieItemsState ->
+                movieItemsState?.let { state ->
+                    state.data?.let {
+                        moviesAdapter.addItems(it)
+                    }
+                }
+            }
+        )
+
+        moviesViewModel.errorMessage.observe(
+            this,
+            Observer { errorMsg ->
+                Snackbar.make(
+                    contMoviesFragment, errorMsg, Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        )
     }
 
     companion object {
