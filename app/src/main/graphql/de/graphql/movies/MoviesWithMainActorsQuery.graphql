@@ -1,0 +1,24 @@
+query MoviesWithMainActorsQuery($year: Int) {
+    moviesWithMainActors(year: $year) {
+           vote_count
+           id
+           video
+           vote_average
+           title
+           popularity
+           poster_path
+           original_language
+           original_title
+           backdrop_path
+           adult
+           overview
+           release_date
+           cast_id
+           character
+           actorId
+           name
+           order
+           movieId
+           profile_path
+    }
+}

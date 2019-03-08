@@ -1,0 +1,9 @@
+query MovieCastQuery($movieId: Int!) {
+   movieCast(movieId: $movieId) {
+        cast_id
+        character
+        id
+        name
+        profile_path
+  }
+}
