@@ -14,7 +14,9 @@
                                                app:layout_constraintTop_toTopOf="parent"
                                                app:layout_constraintStart_toStartOf="parent"
                                                app:layout_constraintEnd_toEndOf="parent"
-                                               android:layout_margin="8dp"
+                                               android:layout_marginTop="8dp"
+                                               android:layout_marginStart="8dp"
+                                               android:layout_marginEnd="8dp"
                                                app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -24,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:background="@android:color/transparent"
-            fab:fab_addButtonColorNormal="@color/colorPrimary"
+            fab:fab_addButtonColorNormal="@color/colorAccent"
             fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
-            fab:fab_addButtonPlusIconColor="@color/colorAccent"
+            fab:fab_addButtonPlusIconColor="@color/white"
             fab:fab_addButtonSize="normal"
             fab:fab_labelStyle="@style/menu_labels_style"
             fab:fab_labelsPosition="left"
@@ -42,28 +44,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_size="mini"
-                fab:fab_colorNormal="@color/white"
-                android:id="@+id/fabMoviesTitlePosterActorNameCharacterPicture"
-                fab:fab_title="Title, Poster, Actor[Name, Character, Picture]"
-                fab:fab_colorPressed="@color/white_pressed"/>
+                fab:fab_colorNormal="@color/colorAccent"
+                android:id="@+id/fabMoviesTitleDatePosterActorNameCharacterPicture"
+                fab:fab_title="Title, Date, Poster, Actor[Name, Character, Picture]"
+                fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_size="mini"
-                fab:fab_colorNormal="@color/white"
+                fab:fab_colorNormal="@color/colorAccent"
                 android:id="@+id/fabMoviesTitleDatePosterActor"
                 fab:fab_title="Title, Date, Poster, Actor[Name]"
-                fab:fab_colorPressed="@color/white_pressed"/>
+                fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
+                fab:fab_colorNormal="@color/colorAccent"
                 fab:fab_size="mini"
-                android:id="@+id/fabMoviesTitleDatePosterGenreScore"
-                fab:fab_title="Title, Date, Poster, Genre, Score"
-                fab:fab_colorPressed="@color/white_pressed"/>
+                android:id="@+id/fabMoviesTitleReleaseDatePosterCategoryVoteAverage"
+                fab:fab_title="Title, Date, Poster, Category, VoteAverage"
+                fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
