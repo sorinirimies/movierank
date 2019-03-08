@@ -14,15 +14,15 @@ const val PARAM_MOVIE = "de.graphql.movies.ui.movies.MOVIE"
 
 class MoviesDetailsActivity : AppCompatActivity() {
 
-    lateinit var viewModel: MoviesDetailsViewModel
+    private lateinit var viewModel: MoviesDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
         viewModel = ViewModelProviders.of(this).get(MoviesDetailsViewModel::class.java)
         val movie = intent.getParcelableExtra<MovieDetails>(PARAM_MOVIE)
-        Picasso.get().load("$TMDB_BASE_IMAGE_URL${TmdbImgSize.IMG_500.size}${movie.posterUrl}").into(imgDetailsPoster)
+        Picasso.get().load("$TMDB_BASE_IMAGE_URL${TmdbImgSize.IMG_500.size}${movie.poster_path}").into(imgDetailsPoster)
         tvDetailsTitle.text = movie.title
-        tvDetailsDescription.text = movie.description
+        tvDetailsDescription.text = movie.overview
     }
 }
