@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 abstract class CoroutineViewModel : ViewModel(), CoroutineScope {
     private val job: Job by lazy(LazyThreadSafetyMode.NONE) { Job() }
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.Default
 
     override fun onCleared() {
         super.onCleared()
