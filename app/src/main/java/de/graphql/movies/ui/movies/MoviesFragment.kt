@@ -14,9 +14,7 @@ import de.graphql.movies.R
 import kotlinx.android.synthetic.main.movies_fragment.*
 import org.koin.androidx.viewmodel.ext.viewModel
 
-enum class MoviesSelectionType {
-    MOVIES_ALL, MOVIES_ACTOR
-}
+enum class MoviesSelectionType { MOVIES_ALL, MOVIES_ACTOR }
 
 class MoviesFragment : Fragment() {
     private val moviesViewModel: MoviesViewModel by viewModel()
@@ -82,8 +80,7 @@ class MoviesFragment : Fragment() {
                 progressLoader.visibility = View.GONE
             }
         )
-        moviesViewModel.errorMessage.observe(
-            this,
+        moviesViewModel.errorMessageLiveData.observe(this,
             Observer { errorMsg ->
                 swipeRefreshLayout.isRefreshing = false
                 progressLoader.visibility = View.GONE
