@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import de.graphql.movies.R
 import org.koin.androidx.viewmodel.ext.viewModel
 
+//FIXME Implement me someday, mkay
 class TvShowsFragment : Fragment() {
 
-    private val tvShowsviewModel: TvShowsViewModel by viewModel()
+    private val tvShowsViewModel: TvShowsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
