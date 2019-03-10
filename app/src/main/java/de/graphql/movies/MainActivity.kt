@@ -12,15 +12,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.transaction {
-                add(
-                    R.id.frag_container, MoviesFragment.newInstance(),
-                    MoviesFragment.TAG_MOVIES
-                )
-            }
+        supportFragmentManager.transaction {
+            add(
+                R.id.frag_container, MoviesFragment.newInstance(),
+                MoviesFragment.TAG_MOVIES
+            )
         }
+
+        //FIXME re-enable when implementing the TV Show part
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_movies -> supportFragmentManager.transaction {
