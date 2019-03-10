@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.graphql.movies.R
 import de.graphql.movies.injection.TMDB_BASE_IMAGE_URL
-import de.graphql.movies.model.MovieDetails
+import de.graphql.movies.model.MovieItem
 import de.graphql.movies.model.TmdbImgSize
 import kotlinx.android.synthetic.main.listitem_movie.view.*
 
 
-typealias  MovieSelected = (movieListItem: MovieDetails) -> Unit
+private typealias  MovieSelected = (movieListItem: MovieItem) -> Unit
 
 class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    private val movieListItems: ArrayList<MovieDetails> = ArrayList()
+    private val movieListItems: ArrayList<MovieItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
         MoviesViewHolder(
@@ -30,13 +30,13 @@ class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Ada
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) =
         holder.bind(movieListItems[position], movieSelected)
 
-    fun addItem(item: MovieDetails) {
+    fun addItem(item: MovieItem) {
         if (movieListItems.map { it.title }.contains(item.title)) return
         movieListItems.add(item)
         notifyItemInserted(movieListItems.indexOf(item))
     }
 
-    fun addItems(items: List<MovieDetails>) {
+    fun addItems(items: List<MovieItem>) {
         movieListItems.clear()
         movieListItems.addAll(items)
         notifyDataSetChanged()
@@ -47,15 +47,13 @@ class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
-    fun removeItem(item: MovieDetails) {
+    fun removeItem(item: MovieItem) {
         val position = movieListItems.indexOf(item)
         movieListItems.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    override fun getItemCount(): Int {
-        return movieListItems.size
-    }
+    override fun getItemCount() = movieListItems.size
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -64,12 +62,12 @@ class MoviesAdapter(private val movieSelected: MovieSelected) : RecyclerView.Ada
         private val tvMovieTitle = view.tvItemMovieTitle
         private val tvItemMovieVoteCount = view.tvItemMovieVoteCount
         private val tvMovieVoteAverage = view.tvItemMovieVoteAverage
-        private val tvMovieActorName = view.tvMovieActorName
+        private val tvMovieActorName = view.tvCastName
         private val tvMovieYear = view.tvItemMovieYear
         private val tvMoviePopularity = view.tvItemMoviePopularity
-        private val imgMovieMainActor = view.imgMovieMainActor
+        private val imgMovieMainActor = view.imgMovieCast
 
-        fun bind(movieListItem: MovieDetails, movieSelected: MovieSelected) {
+        fun bind(movieListItem: MovieItem, movieSelected: MovieSelected) {
             Picasso.get()
                 .load("$TMDB_BASE_IMAGE_URL${TmdbImgSize.IMG_342.size}${movieListItem.poster_path}")
                 .placeholder(R.drawable.ic_movies)
