@@ -36,7 +36,8 @@
                 android:alpha="0.7"
                 tools:text="2018"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/imgItemMoviePoster"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/imgItemMoviePoster"
                 android:layout_marginStart="8dp"/>
 
         <TextView
@@ -50,7 +51,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgItemMoviePoster"
-                app:layout_constraintTop_toBottomOf="@+id/tvItemMovieYear" app:layout_constraintHorizontal_bias="0.0"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvItemMovieYear"
+                app:layout_constraintHorizontal_bias="0.0"/>
 
 
         <TextView
@@ -78,7 +80,8 @@
                 tools:text="36000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgItemMoviePoster"
-                app:layout_constraintTop_toBottomOf="@+id/tvItemMovieTitle" app:layout_constraintHorizontal_bias="0.0"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvItemMovieTitle"
+                app:layout_constraintHorizontal_bias="0.0"/>
 
         <TextView
                 android:id="@+id/tvItemMovieVoteAverage"
@@ -94,7 +97,7 @@
         <de.hdodenhof.circleimageview.CircleImageView android:layout_width="60dp"
                                                       app:civ_border_width="2dp"
                                                       app:civ_border_color="#FF000000"
-                                                      android:id="@+id/imgMovieMainActor"
+                                                      android:id="@+id/imgMovieCast"
                                                       android:layout_height="60dp"
                                                       android:layout_marginBottom="8dp"
                                                       app:layout_constraintBottom_toBottomOf="parent"
@@ -110,8 +113,8 @@
                 tools:text="Charlize Theron"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvMovieActorName"
-                app:layout_constraintTop_toBottomOf="@+id/imgMovieMainActor"
+                android:id="@+id/tvCastName"
+                app:layout_constraintTop_toBottomOf="@+id/imgMovieCast"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toEndOf="@+id/imgItemMoviePoster"
