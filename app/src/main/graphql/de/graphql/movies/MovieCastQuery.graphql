@@ -4,6 +4,7 @@ query MovieCastQuery($movieId: Int!) {
         character
         id
         name
+        order
         profile_path
   }
 }
