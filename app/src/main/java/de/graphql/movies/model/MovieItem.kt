@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MovieDetails(
+class MovieItem(
     val vote_count: Int,
     val id: Int,
     val video: Boolean,
