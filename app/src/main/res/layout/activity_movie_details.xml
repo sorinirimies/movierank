@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDetailsDescription"
                 app:layout_constraintStart_toStartOf="parent"
+                android:lineSpacingMultiplier="1.2"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
