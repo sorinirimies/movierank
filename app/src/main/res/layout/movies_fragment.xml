@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 fab:fab_size="mini"
                 fab:fab_colorNormal="@color/colorAccent"
-                android:id="@+id/fabMoviesAll"
-                fab:fab_title="Title, Date, Poster, Vote[Average, Count], Popularity"
+                android:id="@+id/fabMoviesFromLocalDb"
+                fab:fab_title="Movies from local DB"
                 fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -64,8 +64,8 @@
                 android:layout_height="wrap_content"
                 fab:fab_size="mini"
                 fab:fab_colorNormal="@color/colorAccent"
-                android:id="@+id/fabMoviesTitleDatePosterActor"
-                fab:fab_title="Title, Date, Poster, Actor[Name Picture Character]"
+                android:id="@+id/fabMoviesWithActor"
+                fab:fab_title="Movie with main actor"
                 fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -73,8 +73,8 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/colorAccent"
                 fab:fab_size="mini"
-                android:id="@+id/fabMoviesTitleReleaseDatePosterCategoryVoteAverage"
-                fab:fab_title="Title, Date, Poster, Category, VoteAverage"
+                android:id="@+id/fabMoviesByYear"
+                fab:fab_title="Movies by year"
                 fab:fab_colorPressed="@color/colorPrimaryDark"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
