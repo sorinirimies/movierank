@@ -71,7 +71,7 @@ class MoviesFragment : Fragment() {
     private fun getMoviesBasedOnSelection() = when (currentMoviesSelectionType) {
         MoviesSelectionType.MOVIES_LOCAL_DB -> {
             moviesViewModel.loadMoviesFromDb(50)
-            progressLoader.visibility = View.VISIBLE
+            contMoviesProgressBar.visibility = View.VISIBLE
         }
         MoviesSelectionType.MOVIES_BY_YEAR_WITH_ACTOR,
         MoviesSelectionType.MOVIES_BY_YEAR -> showSearchMoviesByYearDialog()
@@ -83,13 +83,13 @@ class MoviesFragment : Fragment() {
             Observer { movieItems ->
                 moviesAdapter.addItems(movieItems)
                 swipeRefreshLayout.isRefreshing = false
-                progressLoader.visibility = View.GONE
+                contMoviesProgressBar.visibility = View.GONE
             }
         )
         moviesViewModel.errorMessageLiveData.observe(this,
             Observer { errorMsg ->
                 swipeRefreshLayout.isRefreshing = false
-                progressLoader.visibility = View.GONE
+                contMoviesProgressBar.visibility = View.GONE
                 Snackbar.make(
                     contMoviesFragment, errorMsg, Snackbar.LENGTH_SHORT
                 ).show()
@@ -107,7 +107,7 @@ class MoviesFragment : Fragment() {
             } else if (currentMoviesSelectionType == MoviesSelectionType.MOVIES_BY_YEAR_WITH_ACTOR) {
                 moviesViewModel.loadMoviesByYearWithMainActor(yearResult.toIntOrNull())
             }
-            progressLoader.visibility = View.VISIBLE
+            contMoviesProgressBar.visibility = View.VISIBLE
         }
         setNegativeButton(R.string.cancel) { _, _ -> }
     }
