@@ -1,12 +1,10 @@
 package de.graphql.movies.utils
 
-import de.graphql.movies.MovieCastQuery
-import de.graphql.movies.MoviesQuery
-import de.graphql.movies.MoviesWithMainActorsQuery
+import de.graphql.movies.*
 import de.graphql.movies.model.CastItem
 import de.graphql.movies.model.MovieItem
 
-fun MoviesQuery.Movie.toMovieItem() =
+fun LocalDbMoviesQuery.LocalDbMovie.toMovieItem() =
     MovieItem(
         this.vote_count(),
         this.id(),
@@ -21,7 +19,22 @@ fun MoviesQuery.Movie.toMovieItem() =
         this.release_date()
     )
 
-fun MoviesWithMainActorsQuery.MoviesWithMainActor.toMovieItem() =
+fun MoviesByYearQuery.MoviesByYear.toMovieItem() =
+    MovieItem(
+        this.vote_count(),
+        this.id(),
+        this.video(),
+        this.vote_average(),
+        this.title(),
+        this.popularity(),
+        this.poster_path(),
+        this.backdrop_path(),
+        this.adult(),
+        this.overview(),
+        this.release_date()
+    )
+
+fun MoviesByYearWithMainActorsQuery.MoviesByYearWithMainActor.toMovieItem() =
     MovieItem(
         this.vote_count(),
         this.id(),
