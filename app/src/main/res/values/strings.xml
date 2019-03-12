@@ -2,4 +2,7 @@
     <string name="app_name">MovieRank</string>
     <string name="movies">Movies</string>
     <string name="series">Tv Shows</string>
+    <string name="search_movies">Search</string>
+    <string name="hint_movie_by_year">Enter a year e.g. 2018</string>
+    <string name="cancel">Cancel</string>
 </resources>
