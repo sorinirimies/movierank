@@ -1,5 +1,5 @@
-query MoviesQuery($size: Int) {
-  movies(size: $size) {
+query LocalDbMoviesQuery($size: Int) {
+  localDbMovies(size: $size) {
     id
     vote_count
     video

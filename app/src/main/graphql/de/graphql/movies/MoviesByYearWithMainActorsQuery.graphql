@@ -1,5 +1,5 @@
-query MoviesWithMainActorsQuery($year: Int) {
-    moviesWithMainActors(year: $year) {
+query MoviesByYearWithMainActorsQuery($year: Int) {
+    moviesByYearWithMainActors(year: $year) {
            vote_count
            id
            video

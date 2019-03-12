@@ -1,0 +1,17 @@
+query MoviesByYearQuery($year: Int) {
+  moviesByYear(year: $year) {
+    id
+    vote_count
+    video
+    vote_average
+    title
+    popularity
+    poster_path
+    original_language
+    original_title
+    backdrop_path
+    adult
+    overview
+    release_date
+  }
+}

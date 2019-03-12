@@ -43,26 +43,6 @@
               "deprecationReason": null
             },
             {
-              "name": "genre_ids",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  }
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "id",
               "description": null,
               "args": [],
@@ -1976,7 +1956,7 @@
               "deprecationReason": null
             },
             {
-              "name": "movies",
+              "name": "localDbMovies",
               "description": "Returns the entire list of movies",
               "args": [
                 {
@@ -1987,7 +1967,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "10"
+                  "defaultValue": "20"
                 }
               ],
               "type": {
@@ -2011,22 +1991,18 @@
               "deprecationReason": null
             },
             {
-              "name": "popularMovies",
+              "name": "moviesByYear",
               "description": "Returns a list of popular movies",
               "args": [
                 {
                   "name": "year",
                   "description": "Popular movies retrieved based on year",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
-                  "defaultValue": "2016"
+                  "defaultValue": "2018"
                 }
               ],
               "type": {
@@ -2089,7 +2065,7 @@
               "deprecationReason": null
             },
             {
-              "name": "moviesWithMainActors",
+              "name": "moviesByYearWithMainActors",
               "description": "A list of movies with adjacent credits",
               "args": [
                 {
