@@ -85,7 +85,11 @@ dependencies {
     implementation "androidx.room:room-coroutines:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    //Logging
     implementation 'com.jakewharton.timber:timber:4.5.1'
+
+    //Kotlin Extensions
+    implementation("com.sorinirimies:kotlin-ext:1.0.1")
 
     //Dependency injection
     implementation "org.koin:koin-android:$koinVersion"
