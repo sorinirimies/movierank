@@ -5,21 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.sorinirimies.kotlinx.alertDialog
+import com.sorinirimies.kotlinx.init
 import de.graphql.movies.R
 import kotlinx.android.synthetic.main.movies_fragment.*
 import org.koin.androidx.viewmodel.ext.viewModel
 
-enum class MoviesSelectionType { MOVIES_ALL, MOVIES_ACTOR }
+enum class MoviesSelectionType { MOVIES_LOCAL_DB, MOVIES_BY_YEAR_WITH_ACTOR, MOVIES_BY_YEAR }
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class MoviesFragment : Fragment() {
     private val moviesViewModel: MoviesViewModel by viewModel()
     private lateinit var moviesAdapter: MoviesAdapter
-    private var currentMoviesSelectionType = MoviesSelectionType.MOVIES_ALL
+    private var currentMoviesSelectionType = MoviesSelectionType.MOVIES_LOCAL_DB
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +43,7 @@ class MoviesFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = moviesAdapter
         }
-        moviesViewModel.loadMovies(40)
+        moviesViewModel.loadMoviesFromDb(40)
         swipeRefreshLayout.apply {
             setColorSchemeColors(
                 ContextCompat.getColor(requireContext(), R.color.colorPrimary),
@@ -47,28 +51,30 @@ class MoviesFragment : Fragment() {
             )
             setOnRefreshListener { getMoviesBasedOnSelection() }
         }
-        fabMoviesAll.setOnClickListener {
-            currentMoviesSelectionType = MoviesSelectionType.MOVIES_ALL
+        fabMoviesFromLocalDb.setOnClickListener {
+            currentMoviesSelectionType = MoviesSelectionType.MOVIES_LOCAL_DB
             getMoviesBasedOnSelection()
             fabMoviesMenu.collapse()
         }
-        fabMoviesTitleDatePosterActor.setOnClickListener {
-            currentMoviesSelectionType = MoviesSelectionType.MOVIES_ACTOR
+        fabMoviesWithActor.setOnClickListener {
+            currentMoviesSelectionType = MoviesSelectionType.MOVIES_BY_YEAR_WITH_ACTOR
             getMoviesBasedOnSelection()
             fabMoviesMenu.collapse()
         }
-        fabMoviesTitleReleaseDatePosterCategoryVoteAverage.setOnClickListener { fabMoviesMenu.collapse() }
+        fabMoviesByYear.setOnClickListener {
+            currentMoviesSelectionType = MoviesSelectionType.MOVIES_BY_YEAR
+            getMoviesBasedOnSelection()
+            fabMoviesMenu.collapse()
+        }
     }
 
     private fun getMoviesBasedOnSelection() = when (currentMoviesSelectionType) {
-        MoviesSelectionType.MOVIES_ALL -> {
-            moviesViewModel.loadMovies(50)
+        MoviesSelectionType.MOVIES_LOCAL_DB -> {
+            moviesViewModel.loadMoviesFromDb(50)
             progressLoader.visibility = View.VISIBLE
         }
-        MoviesSelectionType.MOVIES_ACTOR -> {
-            moviesViewModel.loadMoviesWithMainActor(2016)
-            progressLoader.visibility = View.VISIBLE
-        }
+        MoviesSelectionType.MOVIES_BY_YEAR_WITH_ACTOR,
+        MoviesSelectionType.MOVIES_BY_YEAR -> showSearchMoviesByYearDialog()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -89,6 +95,21 @@ class MoviesFragment : Fragment() {
                 ).show()
             }
         )
+    }
+
+    private fun showSearchMoviesByYearDialog() = alertDialog(requireContext()) {
+        val v = layoutInflater.init(R.layout.choose_year_dialog)
+        setView(v)
+        setPositiveButton(R.string.search_movies) { _, _ ->
+            val yearResult = v.findViewById<EditText>(R.id.edtEnterYear).text.toString()
+            if (currentMoviesSelectionType == MoviesSelectionType.MOVIES_BY_YEAR) {
+                moviesViewModel.loadMoviesByYear(yearResult.toIntOrNull())
+            } else if (currentMoviesSelectionType == MoviesSelectionType.MOVIES_BY_YEAR_WITH_ACTOR) {
+                moviesViewModel.loadMoviesByYearWithMainActor(yearResult.toIntOrNull())
+            }
+            progressLoader.visibility = View.VISIBLE
+        }
+        setNegativeButton(R.string.cancel) { _, _ -> }
     }
 
     companion object {
